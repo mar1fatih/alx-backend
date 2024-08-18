@@ -6,7 +6,7 @@ from typing import Tuple, List
 
 
 def index_range(page: int, page_size: int) -> Tuple:
-    """ return a tuple of size two containing a start index and an end index """
+    """ return a tuple of size two containing a start and end index """
     start_idx: int = 0
     end_idx: int = 0
 
@@ -37,7 +37,8 @@ class Server:
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """get page method"""
-        assert type(page) == type(page_size) == int and page > 0 and page_size > 0
+        assert type(page) == type(page_size) == int
+        assert page > 0 and page_size > 0
         tuple_idx: Tuple = index_range(page, page_size)
         new_list: List = []
         data_set: Server = self.dataset()
