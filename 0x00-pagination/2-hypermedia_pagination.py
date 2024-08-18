@@ -2,7 +2,7 @@
 """ pagination script """
 import csv
 import math
-from typing import Tuple, List
+from typing import Tuple, List, Union, Dict
 
 
 def index_range(page: int, page_size: int) -> Tuple:
@@ -48,3 +48,24 @@ class Server:
             return new_list
         except IndexError:
             return []
+
+    def get_hyper(self, page: int = 1,
+                  page_size: int = 10) -> Dict[str, Union[int, List]]:
+        """returns a dictionary containing key-value pairs"""
+        assert type(page) == type(page_size) == int
+        assert page > 0 and page_size > 0
+        _dict: Dict[str, Union[int, List]] = {
+            'page_size': 0,
+            'page': 0,
+            'data': [],
+            'next_page': 0,
+            'prev_page': 0,
+            'total_pages': 0
+            }
+        _dict['page'] = page
+        _dict['data'] = self.get_page(page, page_size)
+        _dict['total_pages'] = math.ceil(len(self.dataset()) / page_size)
+        _dict['page_size'] = page_size if page < _dict['total_pages'] else 0
+        _dict['next_page'] = page + 1 if page < _dict['total_pages'] else None
+        _dict['prev_page'] = page - 1 if page > 1 else None
+        return _dict
