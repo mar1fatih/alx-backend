@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" lifo_cache """
+""" LRU_cache """
 from collections import OrderedDict
 
 
