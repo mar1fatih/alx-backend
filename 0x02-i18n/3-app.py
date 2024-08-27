@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ flask app """
-from flask import Flask, render_template
-from flask_babel import Babel, _
+from flask import Flask, render_template, request
+from flask_babel import Babel
 
 
 class Config:
@@ -25,10 +25,7 @@ def get_locale():
 @app.route('/')
 def home():
     """home app"""
-    home_title = _("home_title")
-    home_header = _("home_header")
-    return render_template('2-index.html', home_title=home_title,
-                           home_header=home_header)
+    return render_template('2-index.html')
 
 
 if __name__ == '__main__':
